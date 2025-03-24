@@ -1,34 +1,36 @@
 package com.empresa.erp.models;
 
-import com.empresa.erp.enums.Papel;
+import com.empresa.erp.enums.Role;
 import jakarta.persistence.*;
-import java.util.HashSet;
+
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Usuario {
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true, length = 20)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @ElementCollection(targetClass = Papel.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "papel")
-    private Set<Papel> papeis;
+    @Enumerated(EnumType.STRING) // Mapeia o enum como uma string no banco de dados
+    @Column(name = "role", nullable = false, length = 10)
+    private Role role;
 
-    @Column(nullable = false) // CPF é obrigatório para todos
+    @Column(nullable = false, length = 11) // CPF é obrigatório para todos
     private String cpf;
 
-    @Column(nullable = false) // Telefone é obrigatório para todos
+    @Column(nullable = false, length = 11) // Telefone é obrigatório para todos
     private String telefone;
+
+    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SaleModel> saleModels;
 
     public Long getId() {
         return id;
@@ -43,7 +45,7 @@ public class Usuario {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.toUpperCase();
     }
 
     public String getPassword() {
@@ -54,12 +56,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public Set<Papel> getPapeis() {
-        return papeis;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPapeis(Set<Papel> papeis) {
-        this.papeis = papeis;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getCpf() {

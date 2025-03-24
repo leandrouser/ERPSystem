@@ -2,9 +2,10 @@ package com.empresa.erp.models;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
-public class Produto {
+public class ProductModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,9 @@ public class Produto {
     @Column(nullable = false)
     private Integer quantidadeEstoque;
 
+    @OneToMany(mappedBy = "productModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SaleItemModel> saleItemModels;
+
     public Long getId() {
         return id;
     }
@@ -35,7 +39,7 @@ public class Produto {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getDescricao() {
@@ -43,7 +47,7 @@ public class Produto {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public BigDecimal getPreco() {

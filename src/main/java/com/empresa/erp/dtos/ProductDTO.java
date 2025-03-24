@@ -1,16 +1,25 @@
 package com.empresa.erp.dtos;
 
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
-public class ProdutoDTO {
+public class ProductDTO {
 
+    @NotBlank(message = "O nome é obrigatório.")
     private String nome;
+
+    @NotBlank(message = "A descrição é obrigatória.")
     private String descricao;
+
+    @NotNull(message = "O preço é obrigatório.")
+    @Positive(message = "O preço deve ser positivo.")
     private BigDecimal preco;
+
+    @NotNull(message = "A quantidade em estoque é obrigatória.")
+    @Min(value = 0, message = "A quantidade em estoque não pode ser negativa.")
     private Integer quantidadeEstoque;
 
     // Getters e Setters
-
     public String getNome() {
         return nome;
     }

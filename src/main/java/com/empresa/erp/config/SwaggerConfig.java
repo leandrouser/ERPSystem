@@ -2,6 +2,7 @@ package com.empresa.erp.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +13,13 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API do ERP da D'Lara Enxovais")
+                        .title("ERP System API")
                         .version("1.0.0")
-                        .description("API para gerenciamento de produtos da D'Lara Enxovais."));
+                        .description("API para gerenciamento do sistema ERP")
+                )
+                .addServersItem(new Server()
+                        .url("http://localhost:8080")
+                        .description("Servidor local")
+                );
     }
 }

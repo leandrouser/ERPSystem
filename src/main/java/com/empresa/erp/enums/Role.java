@@ -1,6 +1,6 @@
 package com.empresa.erp.enums;
 
-public enum Papel {
+public enum Role {
     ADMIN,
     VENDEDOR,
     CLIENTE
