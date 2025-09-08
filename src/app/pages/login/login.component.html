@@ -1,0 +1,59 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Header -->
+    <div class="login-header">
+      <h1>PDV System</h1>
+      <p>Bem-vindo ao sistema de ponto de venda</p>
+    </div>
+
+    <!-- Formulário -->
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <!-- Usuário -->
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input 
+          type="text" 
+          id="username" 
+          placeholder="Digite seu usuário"
+          [(ngModel)]="username"
+          name="username"
+          required
+          class="form-input">
+      </div>
+
+      <!-- Senha -->
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Digite sua senha"
+          [(ngModel)]="password"
+          name="password"
+          required
+          class="form-input">
+      </div>
+
+      <!-- Opções -->
+      <div class="form-options">
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+          <span class="checkmark"></span>
+          Lembrar-me
+        </label>
+        <a href="#" class="forgot-password">Esqueci a senha</a>
+      </div>
+
+      <!-- Botão -->
+      <button type="submit" class="login-btn" [disabled]="!username || !password">
+        Entrar
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>© 2024 PDV System. Todos os direitos reservados.</p>
+      <p>v1.0.0</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="home-page">
+  <nav [class.collapsed]="isCollapsed" class="sidebar">
+    <button class="collapse-btn" (click)="toggleCollapse()">
+      {{ isCollapsed ? '▶' : '◀' }}
+    </button>
+
+    <ul>
+      <li *ngFor="let item of menuItens">
+        <a [routerLink]="item.path" routerLinkActive="active">
+          <lucide-icon [name]="item.icon" [size]="20"></lucide-icon>
+          <span *ngIf="!isCollapsed">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
